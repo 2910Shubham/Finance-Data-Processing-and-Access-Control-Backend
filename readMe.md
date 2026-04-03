@@ -302,6 +302,7 @@ All listing queries automatically filter `deletedAt: null` so soft-deleted recor
 
 ---
 
+
 ## Assumptions
 
 These decisions were made to keep the implementation focused and clean:
