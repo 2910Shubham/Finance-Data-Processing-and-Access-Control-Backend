@@ -46,3 +46,18 @@ coverage/
 
 # Misc
 *.local
+
+
+# Uploaded files (if you add file upload later)
+uploads/
+
+# MongoDB local data (if running Mongo locally via Docker or mongod)
+data/
+
+# Test output
+test-results/
+junit.xml
+
+# PM2 (if you deploy with PM2 process manager)
+.pm2/
+ecosystem.config.js
