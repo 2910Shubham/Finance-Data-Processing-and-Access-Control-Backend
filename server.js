@@ -6,6 +6,7 @@ import cors from "cors";
 import morgan from "morgan";
 import connectDB from "./src/config/db.js";
 import authRoutes from "./src/routes/auth.routes.js";
+import userRoutes from "./src/routes/user.routes.js"
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(express.json());
 
 //Routes
 app.use("/api/auth", authRoutes);
+app.use('/api/auth',  authRoutes);
+app.use('/api/users', userRoutes);
 
 //handle 404
 app.use((req, res) => {
