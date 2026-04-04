@@ -93,3 +93,14 @@ export const login = async (req, res) => {
     });
   }
 };
+
+// ─── Logout ──────────────────────────────────────────────────────────────────
+
+export const logout = async (req, res) => {
+  // Since JWT is stateless, logout is handled client-side by discarding the token
+  // No server-side action needed for JWT logout
+  return res.status(200).json({
+    success: true,
+    message: 'Logout successful.',
+  });
+};
