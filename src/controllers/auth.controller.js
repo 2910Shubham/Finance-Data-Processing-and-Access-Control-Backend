@@ -3,7 +3,7 @@ import User from '../models/User.js';
 
 // ─── Register ────────────────────────────────────────────────────────────────
 
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
 
@@ -33,16 +33,13 @@ export const register = async (req, res) => {
         message: 'An account with this email already exists.',
       });
     }
-    return res.status(500).json({
-      success: false,
-      message: 'Registration failed. Please try again.',
-    });
+    return next(err);
   }
 };
 
 // ─── Login ───────────────────────────────────────────────────────────────────
 
-export const login = async (req, res) => {
+export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -87,10 +84,7 @@ export const login = async (req, res) => {
       data: user,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Login failed. Please try again.',
-    });
+    return next(err);
   }
 };
 

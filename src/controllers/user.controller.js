@@ -8,7 +8,7 @@ const isValidObjectId = (id) => mongoose.Types.ObjectId.isValid(id);
 
 // ─── Get all users ────────────────────────────────────────────────────────────
 
-export const getAllUsers = async (req, res) => {
+export const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find().select('-password').sort({ createdAt: -1 });
 
@@ -18,16 +18,13 @@ export const getAllUsers = async (req, res) => {
       data: users,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to fetch users.',
-    });
+    return next(err);
   }
 };
 
 // ─── Create user (admin creates with explicit role) ───────────────────────────
 
-export const createUser = async (req, res) => {
+export const createUser = async (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
 
@@ -53,16 +50,13 @@ export const createUser = async (req, res) => {
         message: 'An account with this email already exists.',
       });
     }
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to create user.',
-    });
+    return next(err);
   }
 };
 
 // ─── Update role ──────────────────────────────────────────────────────────────
 
-export const updateRole = async (req, res) => {
+export const updateRole = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { role } = req.body;
@@ -108,16 +102,13 @@ export const updateRole = async (req, res) => {
         message: err.message,
       });
     }
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to update role.',
-    });
+    return next(err);
   }
 };
 
 // ─── Update status (activate / deactivate) ────────────────────────────────────
 
-export const updateStatus = async (req, res) => {
+export const updateStatus = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { isActive } = req.body;
@@ -165,9 +156,6 @@ export const updateStatus = async (req, res) => {
       data: user,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to update account status.',
-    });
+    return next(err);
   }
 };

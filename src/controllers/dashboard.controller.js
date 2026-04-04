@@ -2,7 +2,7 @@ import * as dashboardService from '../services/dashboard.service.js';
 
 // ─── Summary ──────────────────────────────────────────────────────────────────
 
-export const getSummary = async (req, res) => {
+export const getSummary = async (req, res, next) => {
   try {
     const data = await dashboardService.getSummary();
 
@@ -11,16 +11,13 @@ export const getSummary = async (req, res) => {
       data,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to fetch summary.',
-    });
+    return next(err);
   }
 };
 
 // ─── Category totals ──────────────────────────────────────────────────────────
 
-export const getCategoryTotals = async (req, res) => {
+export const getCategoryTotals = async (req, res, next) => {
   try {
     const data = await dashboardService.getCategoryTotals();
 
@@ -30,16 +27,13 @@ export const getCategoryTotals = async (req, res) => {
       data,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to fetch category totals.',
-    });
+    return next(err);
   }
 };
 
 // ─── Monthly trends ───────────────────────────────────────────────────────────
 
-export const getMonthlyTrends = async (req, res) => {
+export const getMonthlyTrends = async (req, res, next) => {
   try {
     const { months } = req.query;
     const data = await dashboardService.getMonthlyTrends(months);
@@ -50,16 +44,13 @@ export const getMonthlyTrends = async (req, res) => {
       data,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to fetch monthly trends.',
-    });
+    return next(err);
   }
 };
 
 // ─── Recent records ───────────────────────────────────────────────────────────
 
-export const getRecentRecords = async (req, res) => {
+export const getRecentRecords = async (req, res, next) => {
   try {
     const { limit } = req.query;
     const data = await dashboardService.getRecentRecords(limit);
@@ -70,9 +61,6 @@ export const getRecentRecords = async (req, res) => {
       data,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to fetch recent records.',
-    });
+    return next(err);
   }
 };

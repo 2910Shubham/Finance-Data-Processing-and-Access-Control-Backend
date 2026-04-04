@@ -2,7 +2,7 @@ import * as recordService from '../services/record.service.js';
 
 // ─── Get all records ──────────────────────────────────────────────────────────
 
-export const getAllRecords = async (req, res) => {
+export const getAllRecords = async (req, res, next) => {
   try {
     const { type, category, from, to, page, limit } = req.query;
 
@@ -20,16 +20,13 @@ export const getAllRecords = async (req, res) => {
       ...result,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to fetch records.',
-    });
+    return next(err);
   }
 };
 
 // ─── Get single record ────────────────────────────────────────────────────────
 
-export const getRecord = async (req, res) => {
+export const getRecord = async (req, res, next) => {
   try {
     const record = await recordService.getRecordById(req.params.id);
 
@@ -45,16 +42,13 @@ export const getRecord = async (req, res) => {
       data: record,
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to fetch record.',
-    });
+    return next(err);
   }
 };
 
 // ─── Create record ────────────────────────────────────────────────────────────
 
-export const createRecord = async (req, res) => {
+export const createRecord = async (req, res, next) => {
   try {
     const record = await recordService.createRecord({
       ...req.body,
@@ -73,16 +67,13 @@ export const createRecord = async (req, res) => {
         message: err.message,
       });
     }
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to create record.',
-    });
+    return next(err);
   }
 };
 
 // ─── Update record ────────────────────────────────────────────────────────────
 
-export const updateRecord = async (req, res) => {
+export const updateRecord = async (req, res, next) => {
   try {
     const record = await recordService.updateRecord(req.params.id, req.body);
 
@@ -105,16 +96,13 @@ export const updateRecord = async (req, res) => {
         message: err.message,
       });
     }
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to update record.',
-    });
+    return next(err);
   }
 };
 
 // ─── Delete record (soft) ─────────────────────────────────────────────────────
 
-export const deleteRecord = async (req, res) => {
+export const deleteRecord = async (req, res, next) => {
   try {
     const record = await recordService.softDeleteRecord(req.params.id);
 
@@ -131,9 +119,6 @@ export const deleteRecord = async (req, res) => {
       data: { id: record._id, deletedAt: record.deletedAt },
     });
   } catch (err) {
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to delete record.',
-    });
+    return next(err);
   }
 };
