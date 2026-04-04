@@ -7,6 +7,8 @@ import morgan from "morgan";
 import connectDB from "./src/config/db.js";
 import authRoutes from "./src/routes/auth.routes.js";
 import userRoutes from "./src/routes/user.routes.js"
+import recordRoutes from "./src/routes/record.routes.js"
+import dashboardRoutes from "./src/routes/dashboard.routes.js"
 
 const app = express();
 
@@ -20,6 +22,13 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use('/api/auth',  authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth',    authRoutes);
+app.use('/api/users',   userRoutes);
+app.use('/api/records', recordRoutes);
+app.use('/api/auth',      authRoutes);
+app.use('/api/users',     userRoutes);
+app.use('/api/records',   recordRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 //handle 404
 app.use((req, res) => {
