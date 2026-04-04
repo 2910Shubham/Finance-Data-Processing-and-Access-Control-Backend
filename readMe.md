@@ -93,8 +93,8 @@ project/
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/finance-dashboard-api.git
-cd finance-dashboard-api
+git clone https://github.com/2910Shubham/Finance-Data-Processing-and-Access-Control-Backend.git
+cd Finance-Data-Processing-and-Access-Control-Backend
 npm install
 ```
 
