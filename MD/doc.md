@@ -1234,6 +1234,29 @@ npm test -- --coverage
 - Login with wrong password → `401`
 - Login with deactivated account → `403`
 
+---
+
+## 18. Final polish and project status
+
+This implementation has completed the final polish phase for the Finance Dashboard API.
+
+- All protected routes have been reviewed and use `verifyToken` and `requireRole` where required.
+- Passwords are never returned in API responses. The `User` model excludes `password` by default and serialization strips it before response.
+- Soft delete is consistently enforced for financial records via the `deletedAt` field. No hard deletes are performed.
+- Console logging has been reduced to proper log levels: `console.info`, `console.warn`, and `console.error` only.
+- The seed script is verified and works end to end: `npm run seed` creates the admin, analyst, and viewer accounts plus sample financial records.
+- The full automated test suite passes successfully: `npm test` completes with all tests green.
+
+### Recommended final manual verification
+
+1. Run `npm run seed` on a clean database.
+2. Register a new user.
+3. Log in and confirm a JWT token is returned.
+4. Create a financial record as an admin user.
+5. View dashboard endpoints and confirm totals, categories, and trends are accurate.
+
+The project is now ready for final delivery and repository cleanup.
+
 **Access control:**
 - Every admin-only route called with viewer token → `403`
 - Every protected route called without token → `401`

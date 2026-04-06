@@ -22,9 +22,9 @@ const seed = async () => {
       let user = await User.findOne({ email: userDef.email });
       if (!user) {
         user = await User.create(userDef);
-        console.log(`Created user: ${user.email} (${user.role})`);
+        console.info(`Created user: ${user.email} (${user.role})`);
       } else {
-        console.log(`User already exists: ${user.email} (${user.role})`);
+        console.info(`User already exists: ${user.email} (${user.role})`);
       }
       users[userDef.role] = user;
     }
@@ -134,12 +134,12 @@ const seed = async () => {
       ];
 
       await FinancialRecord.insertMany(records);
-      console.log(`Created ${records.length} sample financial records.`);
+      console.info(`Created ${records.length} sample financial records.`);
     } else {
-      console.log(`Found ${existingSampleCount} existing sample records. Skipping record insert.`);
+      console.info(`Found ${existingSampleCount} existing sample records. Skipping record insert.`);
     }
 
-    console.log('Seed completed successfully.');
+    console.info('Seed completed successfully.');
   } catch (err) {
     console.error('Seed error:', err);
     process.exit(1);

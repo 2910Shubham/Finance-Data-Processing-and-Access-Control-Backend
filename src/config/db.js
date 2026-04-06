@@ -6,14 +6,14 @@ const connectDB = async() => {
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
     });
-    console.log(`MongoDB connected: ${conn.connection.host}`);
+    console.info(`MongoDB connected: ${conn.connection.host}`);
     
     mongoose.connection.on('disconnected', ()=>{
         console.warn('MongoDB disconnected')
     })
     
     mongoose.connection.on('reconnected', ()=>{
-        console.log('MongoDB reconnected')
+        console.info('MongoDB reconnected')
     })
     
 
